@@ -1,3 +1,6 @@
+__version__ = '0.1.0'
+
+
 class LimitReader:
     """LimitReader wraps a "reader" object (has a "read" method)
 
