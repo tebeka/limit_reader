@@ -36,3 +36,7 @@ class LimitReader:
         data = self.__obj.read(size)
         self.__size += size
         return data
+
+    def unwrap(self):
+        """Returns the original object"""
+        return self.__obj
