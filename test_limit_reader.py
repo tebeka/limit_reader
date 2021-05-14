@@ -45,3 +45,8 @@ def test_attrs():
 
     with pytest.raises(AttributeError):
         rdr.no_such_method
+
+
+def test_validate():
+    with pytest.raises(TypeError):
+        LimitReader('oops')
