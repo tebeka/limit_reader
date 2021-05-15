@@ -16,8 +16,8 @@ include = [
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
-pytest = ">=6.3"
-pytest-flake8 = ">1.0"
+pytest = "*"
+pytest-flake8 = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
