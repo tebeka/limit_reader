@@ -2,9 +2,6 @@
 
 A port of Go's [io.LimitReader](https://golang.org/pkg/io/#LimitReader) to Python.
 
-**THIS CODE IS STILL IN ALPHA PHASE, USE AT YOUR OWN RISK**
-
-
 ### Examples
 
 #### HTTP Requests
