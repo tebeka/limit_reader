@@ -27,7 +27,7 @@ A port of Go's [io.LimitReader](https://golang.org/pkg/io/#LimitReader) to Pytho
 ```python
 >>> with open('README.md') as fp:
 ...     rdr = LimitReader(fp, 17)
-...     print(rdr.name)
+...     print(rdr.name)  # proxied attribute
 ...     data = rdr.read()
 ... 
 README.md
