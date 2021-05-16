@@ -54,3 +54,6 @@ class LimitReader:
     def unwrap(self):
         """Returns the original object"""
         return self.__obj
+
+    def dir(self):
+        return sorted(dir(self.__obj) + ['unwrap'])

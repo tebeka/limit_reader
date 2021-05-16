@@ -1,5 +1,11 @@
+import re
+import sys
 from io import BytesIO
+from pathlib import Path
 from random import randbytes
+from subprocess import PIPE, Popen
+from urllib.request import urlopen
+from http import HTTPStatus
 
 import pytest
 
@@ -50,3 +56,30 @@ def test_attrs():
 def test_validate():
     with pytest.raises(TypeError):
         LimitReader('oops')
+
+
+def test_request(httpd_port):
+    readme = Path('README.md')
+    file_size = readme.stat().st_size
+
+    resp = urlopen(f'http://localhost:{httpd_port}/{readme.name}')
+    read_size = file_size - 42
+    r = LimitReader(resp, read_size)
+    assert r.status == HTTPStatus.OK
+    data = r.read()
+    assert read_size == len(data)
+
+
+@pytest.fixture
+def httpd_port():
+    # -u for unbuffered stdout, port 0 will pick random free port
+    p = Popen([sys.executable, '-u', '-m', 'http.server', '0'], stdout=PIPE)
+    line = p.stdout.readline().decode()
+    # Serving HTTP on 0.0.0.0 port 42441 (http://0.0.0.0:42441/) ...
+    match = re.search(r'port (\d+)', line)
+    assert match, 'cannot find port in: {line!r}'
+    port = int(match.group(1))
+
+    yield port
+
+    p.kill()
