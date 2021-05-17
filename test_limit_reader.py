@@ -70,6 +70,17 @@ def test_request(httpd_port):
     assert read_size == len(data)
 
 
+def test_file():
+    readme = Path('README.md')
+    file_size = readme.stat().st_size
+    read_size = file_size - 7
+    with readme.open() as fp:
+        r = LimitReader(fp, read_size)
+        assert r.name == readme.name
+        data = r.read()
+    assert read_size == len(data)
+
+
 @pytest.fixture
 def httpd_port():
     # -u for unbuffered stdout, port 0 will pick random free port
