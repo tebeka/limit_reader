@@ -34,7 +34,9 @@ class LimitReader:
         self.__sentinel = sentinel
 
     def __repr__(self):
-        return repr(self.__obj)
+        cls = self.__class__.__name__
+        return f'{cls}({self.__obj!r}, {self.__limit}, ' + \
+               f'sentinel={self.__sentinel!r}'
 
     def __getattr__(self, attr):
         return getattr(self.__obj, attr)
