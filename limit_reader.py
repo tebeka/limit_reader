@@ -1,5 +1,6 @@
 """Wrap an object to limit the amount of data read."""
-__version__ = '0.1.0'
+
+__version__ = '0.1.1'
 
 
 class LimitReader:
